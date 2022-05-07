@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 
 	pb "github.com/gokhanozgur/proto-go-course/proto"
 	"google.golang.org/protobuf/proto"
@@ -66,6 +67,17 @@ func doFile(p proto.Message) {
 	fmt.Println(message)
 }
 
+func doToJSON(p proto.Message) string {
+	jsonString := toJson(p)
+	return jsonString
+}
+
+func doFromJSON(jsonString string, t reflect.Type) proto.Message {
+	message := reflect.New(t).Interface().(proto.Message)
+	fromJson(jsonString, message)
+	return message
+}
+
 func main() {
 	//fmt.Println(doSimple())
 	//fmt.Println(doComplex())
@@ -77,5 +89,20 @@ func main() {
 		fmt.Print("This should be an message: ")
 		doOneOf(&pb.Result_Message{Message: "a message"})
 	*/
-	doFile(doSimple())
+	//doFile(doSimple())
+	/*
+		jsonString := doToJSON(doSimple())
+		message := doFromJSON(jsonString, reflect.TypeOf(pb.Simple{}))
+		fmt.Println(jsonString)
+		fmt.Println(message)
+	*/
+
+	/*
+		jsonString = doToJSON(doComplex())
+		message = doFromJSON(jsonString, reflect.TypeOf(pb.Complex{}))
+		fmt.Println(jsonString)
+		fmt.Println(message)
+	*/
+
+	fmt.Println(doFromJSON(`{"id": 28, "unknown": "test"}`, reflect.TypeOf(pb.Simple{})))
 }
