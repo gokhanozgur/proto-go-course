@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	pb "github.com/gokhanozgur/proto-go-course/proto"
+	"google.golang.org/protobuf/proto"
 )
 
 func doSimple() *pb.Simple {
@@ -56,13 +57,25 @@ func doOneOf(message interface{}) {
 	}
 }
 
+func doFile(p proto.Message) {
+	path := "simple.bin"
+
+	writeToFile(path, p)
+	message := &pb.Simple{}
+	readFromFile(path, message)
+	fmt.Println(message)
+}
+
 func main() {
 	//fmt.Println(doSimple())
 	//fmt.Println(doComplex())
 	//fmt.Println(doEnum())
 	//fmt.Println(doMap())
-	fmt.Print("This should be an Id: ")
-	doOneOf(&pb.Result_Id{Id: 28})
-	fmt.Print("This should be an message: ")
-	doOneOf(&pb.Result_Message{Message: "a message"})
+	/*
+		fmt.Print("This should be an Id: ")
+		doOneOf(&pb.Result_Id{Id: 28})
+		fmt.Print("This should be an message: ")
+		doOneOf(&pb.Result_Message{Message: "a message"})
+	*/
+	doFile(doSimple())
 }
