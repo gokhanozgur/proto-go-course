@@ -28,7 +28,15 @@ func doComplex() *pb.Complex {
 	}
 }
 
+func doEnum() *pb.Enumeration {
+	return &pb.Enumeration{
+		//EyeColor: 1,
+		EyeColor: pb.EyeColor_EYE_COLOR_GREEN,
+	}
+}
+
 func main() {
 	//fmt.Println(doSimple())
-	fmt.Println(doComplex())
+	//fmt.Println(doComplex())
+	fmt.Println(doEnum())
 }
