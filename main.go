@@ -35,8 +35,19 @@ func doEnum() *pb.Enumeration {
 	}
 }
 
+func doMap() *pb.MapExample {
+	return &pb.MapExample{
+		Ids: map[string]*pb.IdWrapper{
+			"myid":  {Id: 28},
+			"myid2": {Id: 21},
+			"myid3": {Id: 53},
+		},
+	}
+}
+
 func main() {
 	//fmt.Println(doSimple())
 	//fmt.Println(doComplex())
-	fmt.Println(doEnum())
+	//fmt.Println(doEnum())
+	fmt.Println(doMap())
 }
