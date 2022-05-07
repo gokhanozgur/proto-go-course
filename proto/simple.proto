@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package main;
+package example.simple;;
 
 option go_package = "github.com/gokhanozgur/proto-go-course/proto";
 
